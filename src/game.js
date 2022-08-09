@@ -5,6 +5,7 @@ console.log("Welcome to Zorct!");
 /* === Variables === */
 
 const $location = document.getElementsByClassName("location");
+const $locationHalf = document.getElementsByClassName("location-half");
 const $score = document.getElementsByClassName("score");
 const $moves = document.getElementsByClassName("moves");
 const $text = document.getElementsByClassName("text");
@@ -35,11 +36,20 @@ const game = {
     /* Game Progress Stages */
 
     stage0 () {
-        $location.empty().append(`<p>${this.location}</p>`);
-        $score.empty().append(`<p>${this.score}</p>`);
-        $moves.empty().append(`<p>${this.moves}</p>`);
-        $text.empty().append(this.$copy).append(this.$start);
-        this.startTimer();
+        while ($location.lastChild) {
+            $location.removeChild($location.lastChild);
+        }
+        // $locationHalf[0].innerHTML += `<p>${this.location}</p>`;
+        // while ($score.lastChild) {
+        //     $score.removeChild($score.lastChild);
+        // }
+        // $score[0].innerHTML += `<p>${this.score}</p>`;
+        // while ($moves.lastChild) {
+        //     $moves.removeChild($moves.lastChild);
+        // }
+        // $moves[0].innerHTML += `<p>${this.moves}</p>`;
+        // $text.empty().append(this.$copy).append(this.$start);
+        // this.startTimer();
     },
 
     /* Check Command */
@@ -113,4 +123,4 @@ window.addEventListener("keydown", function(e) {
 
 /* === Game Start === */
 
-// game.stage0();
+game.stage0();
