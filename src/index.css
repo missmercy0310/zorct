@@ -1,13 +1,96 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Windows-Command-Prompt';
+  src: url('fonts/Windows-Command-Prompt.eot'); /* IE9 Compat Modes */
+  src: url('fonts/Windows-Command-Prompt.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/Windows-Command-Prompt.woff') format('woff'), /* Modern Browsers */
+       url('fonts/Windows-Command-Prompt.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/Windows-Command-Prompt.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  font-family: 'Windows-Command-Prompt';
+  font-size: 30px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  line-height: 27px;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner {
+  color: black;
+  background-color: lightgrey;
+  height: 4vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location-half {
+  display: flex;
+  margin: 10px;
+  width: 50vw;
+}
+
+.stats-half {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  width: 50vw;
+}
+
+.stats {
+  width: 50vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.score-section {
+  display: flex;
+  gap: 10px;
+}
+
+.moves-section {
+  display: flex;
+  gap: 10px;
+}
+
+.screen {
+  color: lightgrey;
+  background-color: black;
+  height: 96vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-inner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.text {
+  margin: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.response {
+  margin-top: -24px;
+}
+
+.term {
+  margin: 10px;
+  display: flex;
 }
