@@ -39,17 +39,17 @@ const game = {
         while ($location.lastChild) {
             $location.removeChild($location.lastChild);
         }
-        // $locationHalf[0].innerHTML += `<p>${this.location}</p>`;
-        // while ($score.lastChild) {
-        //     $score.removeChild($score.lastChild);
-        // }
-        // $score[0].innerHTML += `<p>${this.score}</p>`;
-        // while ($moves.lastChild) {
-        //     $moves.removeChild($moves.lastChild);
-        // }
-        // $moves[0].innerHTML += `<p>${this.moves}</p>`;
-        // $text.empty().append(this.$copy).append(this.$start);
-        // this.startTimer();
+        $locationHalf[0].innerHTML += `<p>${this.location}</p>`;
+        while ($score.lastChild) {
+            $score.removeChild($score.lastChild);
+        }
+        $score[0].innerHTML += `<p>${this.score}</p>`;
+        while ($moves.lastChild) {
+            $moves.removeChild($moves.lastChild);
+        }
+        $moves[0].innerHTML += `<p>${this.moves}</p>`;
+        $text.empty().append(this.$copy).append(this.$start);
+        this.startTimer();
     },
 
     /* Check Command */

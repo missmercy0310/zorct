@@ -25,7 +25,7 @@
 
 .banner {
   color: black;
-  background-color: lightgrey;
+  background-color: #AAAAAA;
   height: 4vh;
   width: 100vw;
   display: flex;
@@ -64,7 +64,7 @@
 }
 
 .screen {
-  color: lightgrey;
+  color: #AAAAAA;
   background-color: black;
   height: 96vh;
   width: 100vw;
