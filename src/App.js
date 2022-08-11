@@ -7,8 +7,9 @@ let location = "West of House"
 let score = 0;
 let moves = 0;
 let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
+let welcome = <div className='welcome'><p>You have been sent to Hell for misuse of the word "multitudinous." Have a look around.</p></div>
 let start = <div className="start"><p>West of House</p><p>You are standing in an open field west of a white house, with a boarded front door.</p><p>There is a small mailbox here.</p></div>;
-let text = [copy,start];
+let text = [copy, welcome, start];
 let typing = [];
 
 /* === Components === */
@@ -62,23 +63,23 @@ function Moves(props) {
     );
 }
 
+const checkCommand = (command) => {
+    if (command[0] === 'sound') {
+        if (command[1] === 'on') {
+            sound = true;
+        } else if (command[1] === 'off') {
+            sound = false;
+        }
+    } else {
+        text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+    }
+}
+
 const Screen = (props) => {
     const [screenTyping, setTyping] = React.useState('');
     const [screenText, setText] = React.useState(props.text.map((item, index) =>
         <div key={index}>{item}</div>
     ));
-
-    const checkCommand = (command) => {
-        if (command[0] === 'sound') {
-            if (command[1] === 'on') {
-                sound = true;
-            } else if (command[1] === 'off') {
-                sound = false;
-            }
-        } else {
-            text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
-        }
-    }
 
     const handleKeyDown = (e) => {
         let k = (e.keyCode ? e.keyCode : e.which);
