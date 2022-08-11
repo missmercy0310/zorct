@@ -7,6 +7,15 @@
        url('fonts/Windows-Command-Prompt.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
+@font-face {
+  font-family: 'ArcadeInterlaced';
+  src: url('fonts/ArcadeInterlaced.eot'); /* IE9 Compat Modes */
+  src: url('fonts/ArcadeInterlaced.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/ArcadeInterlaced.woff') format('woff'), /* Modern Browsers */
+       url('fonts/ArcadeInterlaced.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/ArcadeInterlaced.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
 * {
   font-family: 'Windows-Command-Prompt';
   font-size: 30px;
@@ -70,6 +79,12 @@
   width: 100vw;
   position: relative;
   overflow: hidden;
+}
+
+.title {
+  font-family: 'ArcadeInterlaced';
+  font-size: 50px;
+  line-height: 47px;
 }
 
 .screen-inner {

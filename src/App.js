@@ -6,7 +6,7 @@ let sound = true;
 let location = "West of House"
 let score = 0;
 let moves = 0;
-let copy = <div className="copy"><p>Croak</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
+let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
 let start = <div className="start"><p>West of House</p><p>You are standing in an open field west of a white house, with a boarded front door.</p><p>There is a small mailbox here.</p></div>;
 let text = [copy,start];
 let typing = [];
@@ -62,59 +62,73 @@ function Moves(props) {
     );
 }
 
-class Screen extends React.Component {
-    constructor (props) {
-        super (props);
-        this.state = {typing: '', text: text.map((item, index) =>
-            <div key={index}>{item}</div>
-        )}
-    }
+const Screen = (props) => {
+    const [screenTyping, setTyping] = React.useState('');
+    const [screenText, setText] = React.useState(props.text.map((item, index) =>
+        <div key={index}>{item}</div>
+    ));
 
-    handleChange(e) {
-        let k = (e.key);
-        if (k === "Tab" ||
-        k === "CapsLock" ||
-        k === "Shift" ||
-        k === "Control" ||
-        k === "Alt" ||
-        k === "Escape") {
-            
-        } else if (k === "Backspace") {
-            typing.pop();
-            this.setState({typing: typing.join('')});
-        } else if (k === "Enter") {
-            text.push(<p class="typed">{'>'}{typing.join('')}</p>)
-            typing = [];
-            this.setState({typing: '', text: text.map((item, index) =>
-                <div key={index}>{item}</div>
-            )});
-        } else if (k) {
-            typing.push(`${k}`);
-            this.setState({typing: typing.join('')});
+    const checkCommand = (command) => {
+        if (command[0] === 'sound') {
+            if (command[1] === 'on') {
+                sound = true;
+            } else if (command[1] === 'off') {
+                sound = false;
+            }
+        } else {
+            text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
         }
     }
 
-    // TODO Update componentWillMount to componentDidMount
-
-    componentWillMount() {
-        window.addEventListener('keydown', this.handleChange.bind(this));
-    }
-
-    render() {
-        return (
-            <div className="screen">
-                <div className="screen-inner">
-                    <Text text={this.state.text} />
-                    <div className="term">
-                        <p className="arrow">{">"}</p>
-                        <Typing typing={this.state.typing} />
-                        <Cursor />
-                    </div>
+    const handleKeyDown = (e) => {
+        let k = (e.keyCode ? e.keyCode : e.which);
+        if (k === 9 ||
+        k === 16 ||
+        k === 17 ||
+        k === 18 ||
+        k === 19 ||
+        k === 20 ||
+        k === 27) {
+            
+        } else if (k === 8) {
+            typing.pop();
+            setTyping(typing.join(''));
+        } else if (k === 13) {
+            text.push(<p className="typed">{'>'}{typing.join('')}</p>)
+            let command  = typing.join('').split(' ');
+            checkCommand(command);
+            typing = [];
+            setTyping('')
+            setText(text.map((item, index) =>
+                <div key={index}>{item}</div>
+            ));
+        } else if (e.key) {
+            typing.push(`${e.key}`);
+            setTyping(typing.join(''));
+        }
+    };
+  
+    React.useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+  
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    });
+  
+    return (
+        <div className="screen">
+            <div className="screen-inner">
+                <Text text={screenText} />
+                <div className="term">
+                    <p className="arrow">{">"}</p>
+                    <Typing typing={screenTyping} />
+                    <Cursor />
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 class Text extends React.Component {
     render() {
@@ -152,7 +166,6 @@ class Cursor extends React.Component {
     }
     
     tick() {
-        console.log(this.state.count)
         if (this.state.count === 0) {
             this.setState({
                 cursor: false,
