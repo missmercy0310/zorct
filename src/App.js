@@ -22,16 +22,7 @@ function App() {
                 <Location location={location} />
             </div>
             <div className="stats-half">
-                <div className="stats">
-                    <div className="score-section">
-                        <p>Score :</p>
-                        <Score score={score} />
-                    </div>
-                    <div className="moves-section">
-                        <p>Moves :</p>
-                        <Moves moves={moves} />
-                    </div>
-                </div>
+                <Stats score={score} moves={moves} />
             </div>
         </div>
         <Screen text={text} typing={typing} />
@@ -45,6 +36,63 @@ function Location(props) {
             <p>{props.location}</p>
         </div>
     );
+}
+
+// function Stats(props) {
+//     const [scoreCount, setScore] = React.useState(props.score);
+//     const [movesCount, setMoves] = React.useState(props.moves);
+
+//     const setStats = () => {
+//         setScore(score);
+//         setMoves(moves);
+//     }
+
+//     React.useEffect(() => {
+//         setScore(score);
+//         setMoves(moves);
+//     }, [props.score, props.moves]);
+
+//     return (
+        // <div className="stats">
+        //     <div className="score-section">
+        //         <p>Score :</p>
+        //         <Score score={score} />
+        //     </div>
+        //     <div className="moves-section">
+        //         <p>Moves :</p>
+        //         <Moves moves={score} />
+        //     </div>
+        // </div>
+//     );
+// }
+
+class Stats extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {scoreCount: this.props.score, movesCount: this.props.moves}
+    }
+
+    componentDidMount() {
+        this.setState({
+            scoreCount: this.props.score,
+            movesCount: this.props.moves
+        });
+    }
+
+    render() {
+        return (
+            <div className="stats">
+            <div className="score-section">
+                <p>Score :</p>
+                <Score score={this.state.scoreCount} />
+            </div>
+            <div className="moves-section">
+                <p>Moves :</p>
+                <Moves moves={this.state.movesCount} />
+            </div>
+        </div>
+        )
+    }
 }
 
 function Score(props) {
@@ -67,6 +115,8 @@ const checkCommand = (command) => {
     if (command[0] === 'sound') {
         if (command[1] === 'on') {
             sound = true;
+            moves += 1;
+            console.log(moves);
         } else if (command[1] === 'off') {
             sound = false;
         }
@@ -111,7 +161,7 @@ const Screen = (props) => {
   
     React.useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
-  
+        
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
