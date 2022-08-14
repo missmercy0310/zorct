@@ -1,3 +1,5 @@
+/* === Imports === */
+
 import React from 'react';
 
 /* === Variables === */
@@ -17,115 +19,15 @@ let typing = [];
 function App() {
   return (
     <div className="App">
-        <div className="banner">
-            <div className="location-half">
-                <Location location={location} />
-            </div>
-            <div className="stats-half">
-                <Stats score={score} moves={moves} />
-            </div>
-        </div>
-        <Screen text={text} typing={typing} />
+        <Screen location={location} score={score} moves={moves} text={text} typing={typing} />
     </div>
   );
 }
 
-function Location(props) {
-    return (
-        <div className="location">
-            <p>{props.location}</p>
-        </div>
-    );
-}
-
-// function Stats(props) {
-//     const [scoreCount, setScore] = React.useState(props.score);
-//     const [movesCount, setMoves] = React.useState(props.moves);
-
-//     const setStats = () => {
-//         setScore(score);
-//         setMoves(moves);
-//     }
-
-//     React.useEffect(() => {
-//         setScore(score);
-//         setMoves(moves);
-//     }, [props.score, props.moves]);
-
-//     return (
-        // <div className="stats">
-        //     <div className="score-section">
-        //         <p>Score :</p>
-        //         <Score score={score} />
-        //     </div>
-        //     <div className="moves-section">
-        //         <p>Moves :</p>
-        //         <Moves moves={score} />
-        //     </div>
-        // </div>
-//     );
-// }
-
-class Stats extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {scoreCount: this.props.score, movesCount: this.props.moves}
-    }
-
-    componentDidMount() {
-        this.setState({
-            scoreCount: this.props.score,
-            movesCount: this.props.moves
-        });
-    }
-
-    render() {
-        return (
-            <div className="stats">
-            <div className="score-section">
-                <p>Score :</p>
-                <Score score={this.state.scoreCount} />
-            </div>
-            <div className="moves-section">
-                <p>Moves :</p>
-                <Moves moves={this.state.movesCount} />
-            </div>
-        </div>
-        )
-    }
-}
-
-function Score(props) {
-    return (
-        <div className="score">
-            <p>{props.score}</p>
-        </div>
-    );
-}
-
-function Moves(props) {
-    return (
-        <div className="moves">
-            <p>{props.moves}</p>
-        </div>
-    );
-}
-
-const checkCommand = (command) => {
-    if (command[0] === 'sound') {
-        if (command[1] === 'on') {
-            sound = true;
-            moves += 1;
-            console.log(moves);
-        } else if (command[1] === 'off') {
-            sound = false;
-        }
-    } else {
-        text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
-    }
-}
-
 const Screen = (props) => {
+    const [screenLocation, setLocation] = React.useState(props.location);
+    const [screenScore, setScore] = React.useState(props.score);
+    const [screenMoves, setMoves] = React.useState(props.moves);
     const [screenTyping, setTyping] = React.useState('');
     const [screenText, setText] = React.useState(props.text.map((item, index) =>
         <div key={index}>{item}</div>
@@ -148,6 +50,9 @@ const Screen = (props) => {
             text.push(<p className="typed">{'>'}{typing.join('')}</p>)
             let command  = typing.join('').split(' ');
             checkCommand(command);
+            setLocation(location);
+            setScore(score);
+            setMoves(moves);
             typing = [];
             setTyping('')
             setText(text.map((item, index) =>
@@ -161,25 +66,68 @@ const Screen = (props) => {
   
     React.useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
-        
+  
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     });
   
     return (
-        <div className="screen">
-            <div className="screen-inner">
-                <Text text={screenText} />
-                <div className="term">
-                    <p className="arrow">{">"}</p>
-                    <Typing typing={screenTyping} />
-                    <Cursor />
+        <div className='screen'>
+            <div className="banner">
+                <div className="location-half">
+                    <Location location={screenLocation} />
+                </div>
+                <div className="stats-half">
+                    <div className="stats">
+                        <div className="score-section">
+                            <p>Score :</p>
+                            <Score score={screenScore} />
+                        </div>
+                        <div className="moves-section">
+                            <p>Moves :</p>
+                            <Moves moves={screenMoves} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="screen-main">
+                <div className="screen-inner">
+                    <Text text={screenText} />
+                    <div className="term">
+                        <p className="arrow">{">"}</p>
+                        <Typing typing={screenTyping} />
+                        <Cursor />
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
+
+function Location(props) {
+    return (
+        <div className="location">
+            <p>{props.location}</p>
+        </div>
+    );
+}
+
+function Score(props) {
+    return (
+        <div className="score">
+            <p>{props.score}</p>
+        </div>
+    );
+}
+
+function Moves(props) {
+    return (
+        <div className="moves">
+            <p>{props.moves}</p>
+        </div>
+    );
+}
 
 class Text extends React.Component {
     render() {
@@ -245,6 +193,20 @@ class Cursor extends React.Component {
     }
 }
 
+/* === Functions === */
+
+const checkCommand = (command) => {
+    if (command[0] === 'sound') {
+        if (command[1] === 'on' && !command[2]) {
+            sound = true;
+        } else if (command[1] === 'off' && !command[2]) {
+            sound = false;
+        }
+    } else {
+        text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+    }
+}
+
 /* === Event Listeners === */
 
 window.addEventListener("keyup", function() {
@@ -253,5 +215,7 @@ window.addEventListener("keyup", function() {
         audio.play();
     }
 });
+
+/* === Exports === */
 
 export default App;
