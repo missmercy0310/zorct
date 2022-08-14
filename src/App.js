@@ -1,6 +1,7 @@
 /* === Imports === */
 
 import React from 'react';
+import Cursor from './Components/Cursor';
 
 /* === Variables === */
 
@@ -24,7 +25,7 @@ function App() {
   );
 }
 
-const Screen = (props) => {
+function Screen(props) {
     const [screenLocation, setLocation] = React.useState(props.location);
     const [screenScore, setScore] = React.useState(props.score);
     const [screenMoves, setMoves] = React.useState(props.moves);
@@ -129,68 +130,18 @@ function Moves(props) {
     );
 }
 
-class Text extends React.Component {
-    render() {
-        return (
-            <div className="text">{this.props.text}</div>
-        );
-    }
+function Text(props) {
+    return (
+        <div className="text">{props.text}</div>
+    );
 }
 
-class Typing extends React.Component {
-    render() {
-        return (
-            <div className="typing">
-                <p>{this.props.typing}</p>
-            </div>
-        );
-    }
-}
-
-class Cursor extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {count: 0, cursor: false};
-    }
-    
-    componentDidMount() {
-        this.timerID = setInterval(
-            () => this.tick(),
-            200
-        );
-    }
-    
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-    
-    tick() {
-        if (this.state.count === 0) {
-            this.setState({
-                cursor: false,
-                count: this.state.count + 1
-            });
-        } else if (this.state.count === 1) {
-            this.setState({
-                cursor: true,
-                count: 0
-            });
-        };
-    }
-
-    render() {
-        let p
-        if (this.state.cursor) {
-            p = <p>_</p>
-        } else {
-            p = <p></p>
-        }
-        return (
-            <div className='cursor'>
-                {p}
-            </div>
-        )
-    }
+function Typing(props) {
+    return (
+        <div className="typing">
+            <p>{props.typing}</p>
+        </div>
+    );
 }
 
 /* === Functions === */
