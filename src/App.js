@@ -5,36 +5,59 @@ import Cursor from './Components/Cursor';
 
 /* === Variables === */
 
-let sound = true;
-let location = "West of House"
-let score = 0;
-let moves = 0;
 let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
 let welcome = <div className='welcome'><p>You have been sent to Hell for misuse of the word "multitudinous." Have a look around.</p></div>
 let start = <div className="start"><p>West of House</p><p>You are standing in an open field west of a white house, with a boarded front door.</p><p>There is a small mailbox here.</p></div>;
-let text = [copy, welcome, start];
-let typing = [];
 
 /* === Components === */
 
 function App() {
   return (
     <div className="App">
-        <Screen location={location} score={score} moves={moves} text={text} typing={typing} />
+        <Screen sound={true} location={"West of House"} score={0} moves={0} text={[copy, welcome, start]} typing={[]} />
     </div>
   );
 }
 
-function Screen(props) {
-    const [screenLocation, setLocation] = React.useState(props.location);
-    const [screenScore, setScore] = React.useState(props.score);
-    const [screenMoves, setMoves] = React.useState(props.moves);
-    const [screenTyping, setTyping] = React.useState('');
-    const [screenText, setText] = React.useState(props.text.map((item, index) =>
-        <div key={index}>{item}</div>
-    ));
+class Screen extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const handleKeyDown = (e) => {
+        this.state = {
+            sound: props.sound,
+            location: props.location,
+            score: props.score,
+            moves: props.moves,
+            text: props.text,
+            typing: props.typing
+        }
+
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.checkCommand = this.checkCommand.bind(this);
+        
+    }
+
+    checkCommand = (command) => {
+        if (command[0] === 'sound') {
+            if (command[1] === 'on' && !command[2]) {
+                this.setState({sound: true});
+            } else if (command[1] === 'off' && !command[2]) {
+                this.setState({sound: false});
+            }
+        } else {
+            this.props.text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+        }
+    }
+
+    handleKeyUp = (e) => {
+        let audio = new Audio(`Thocks/Thock${Math.floor(Math.random() * 8)}.mp3`);
+        if (this.state.sound) {
+            audio.play();
+        }
+    }
+
+    handleKeyDown = (e) => {
         let k = (e.keyCode ? e.keyCode : e.which);
         if (k === 9 ||
         k === 16 ||
@@ -45,66 +68,71 @@ function Screen(props) {
         k === 27) {
             
         } else if (k === 8) {
-            typing.pop();
-            setTyping(typing.join(''));
+            this.props.typing.pop();
+            this.setState({typing: this.props.typing.join('')});
         } else if (k === 13) {
-            text.push(<p className="typed">{'>'}{typing.join('')}</p>)
-            let command  = typing.join('').split(' ');
-            checkCommand(command);
-            setLocation(location);
-            setScore(score);
-            setMoves(moves);
-            typing = [];
-            setTyping('')
-            setText(text.map((item, index) =>
-                <div key={index}>{item}</div>
-            ));
+            this.props.text.push(<p className="typed">{'>'}{
+                this.props.typing.join('')
+            }</p>);
+            let command = this.props.typing.join('').split(' ');
+            console.log(command);
+            this.checkCommand(command);
+            this.props.typing.splice(0,this.props.typing.length);
+            this.setState({
+                text: this.props.text.map((item, index) =>
+                    <div key={index}>{item}</div>
+                )
+            });
         } else if (e.key) {
-            typing.push(`${e.key}`);
-            setTyping(typing.join(''));
+            this.props.typing.push(`${e.key}`);
+            this.setState({typing: this.props.typing.join('')});
         }
     };
-  
-    React.useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-  
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    });
-  
-    return (
-        <div className='screen'>
-            <div className="banner">
-                <div className="location-half">
-                    <Location location={screenLocation} />
-                </div>
-                <div className="stats-half">
-                    <div className="stats">
-                        <div className="score-section">
-                            <p>Score :</p>
-                            <Score score={screenScore} />
+
+    componentDidMount() {
+        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keyup', this.handleKeyUp);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keyup', this.handleKeyUp);
+    }
+
+    render() {
+        return (
+            <div className='screen'>
+                <div className="banner">
+                    <div className="location-half">
+                        <Location location={this.props.location} />
+                    </div>
+                    <div className="stats-half">
+                        <div className="stats">
+                            <div className="score-section">
+                                <p>Score :</p>
+                                <Score score={this.props.score} />
+                            </div>
+                            <div className="moves-section">
+                                <p>Moves :</p>
+                                <Moves moves={this.props.moves} />
+                            </div>
                         </div>
-                        <div className="moves-section">
-                            <p>Moves :</p>
-                            <Moves moves={screenMoves} />
+                    </div>
+                </div>
+                <div className="screen-main">
+                    <div className="screen-inner">
+                        <Text text={this.props.text} />
+                        <div className="term">
+                            <p className="arrow">{">"}</p>
+                            <Typing typing={this.props.typing} />
+                            <Cursor />
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="screen-main">
-                <div className="screen-inner">
-                    <Text text={screenText} />
-                    <div className="term">
-                        <p className="arrow">{">"}</p>
-                        <Typing typing={screenTyping} />
-                        <Cursor />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 function Location(props) {
     return (
@@ -143,29 +171,6 @@ function Typing(props) {
         </div>
     );
 }
-
-/* === Functions === */
-
-const checkCommand = (command) => {
-    if (command[0] === 'sound') {
-        if (command[1] === 'on' && !command[2]) {
-            sound = true;
-        } else if (command[1] === 'off' && !command[2]) {
-            sound = false;
-        }
-    } else {
-        text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
-    }
-}
-
-/* === Event Listeners === */
-
-window.addEventListener("keyup", function() {
-    let audio = new Audio(`Thocks/Thock${Math.floor(Math.random() * 8)}.mp3`);
-    if (sound) {
-        audio.play();
-    }
-});
 
 /* === Exports === */
 
