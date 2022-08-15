@@ -1,23 +1,10 @@
-/* === Imports === */
-
-import React from 'react';
-import Cursor from './Components/Cursor';
-
-/* === Variables === */
-
-let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
-let welcome = <div className='welcome'><p>You have been sent to Hell for misuse of the word "multitudinous." Have a look around.</p></div>
-let start = <div className="start"><p>West of House</p><p>You are standing in an open field west of a white house, with a boarded front door.</p><p>There is a small mailbox here.</p></div>;
-
-/* === Components === */
-
-function App() {
-  return (
-    <div className="App">
-        <Screen sound={true} location={"West of House"} score={0} moves={0} text={[copy, welcome, start]} typing={[]} />
-    </div>
-  );
-}
+import React from "react";
+import Location from "./Location";
+import Score from "./Score";
+import Moves from "./Moves";
+import Text from "./Text";
+import Typing from "./Typing";
+import Cursor from "./Cursor";
 
 class Screen extends React.Component {
     constructor(props) {
@@ -134,44 +121,4 @@ class Screen extends React.Component {
     }
 }
 
-function Location(props) {
-    return (
-        <div className="location">
-            <p>{props.location}</p>
-        </div>
-    );
-}
-
-function Score(props) {
-    return (
-        <div className="score">
-            <p>{props.score}</p>
-        </div>
-    );
-}
-
-function Moves(props) {
-    return (
-        <div className="moves">
-            <p>{props.moves}</p>
-        </div>
-    );
-}
-
-function Text(props) {
-    return (
-        <div className="text">{props.text}</div>
-    );
-}
-
-function Typing(props) {
-    return (
-        <div className="typing">
-            <p>{props.typing}</p>
-        </div>
-    );
-}
-
-/* === Exports === */
-
-export default App;
+export default Screen;
