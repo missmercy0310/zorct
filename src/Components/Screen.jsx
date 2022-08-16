@@ -11,18 +11,17 @@ class Screen extends React.Component {
         super(props);
 
         this.state = {
-            sound: props.sound,
-            location: props.location,
-            score: props.score,
-            moves: props.moves,
-            text: props.text,
-            typing: props.typing
+            sound: this.props.sound,
+            location: this.props.location,
+            score: this.props.score,
+            moves: this.props.moves,
+            text: this.props.text,
+            typing: this.props.typing
         }
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
         this.checkCommand = this.checkCommand.bind(this);
-        
     }
 
     checkCommand = (command) => {
@@ -33,7 +32,7 @@ class Screen extends React.Component {
                 this.setState({sound: false});
             }
         } else {
-            this.props.text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+            this.state.text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
         }
     }
 
@@ -55,24 +54,20 @@ class Screen extends React.Component {
         k === 27) {
             
         } else if (k === 8) {
-            this.props.typing.pop();
-            this.setState({typing: this.props.typing.join('')});
+            this.state.typing.pop();
+            this.setState({typing: this.state.typing});
         } else if (k === 13) {
-            this.props.text.push(<p className="typed">{'>'}{
-                this.props.typing.join('')
+            this.state.text.push(<p className="typed">{'>'}{
+                this.state.typing.join('')
             }</p>);
-            let command = this.props.typing.join('').split(' ');
-            console.log(command);
+            let command = this.state.typing.join('').split(' ');
             this.checkCommand(command);
-            this.props.typing.splice(0,this.props.typing.length);
             this.setState({
-                text: this.props.text.map((item, index) =>
-                    <div key={index}>{item}</div>
-                )
+                typing: [],
+                text: this.state.text
             });
         } else if (e.key) {
-            this.props.typing.push(`${e.key}`);
-            this.setState({typing: this.props.typing.join('')});
+            this.setState({typing: [...this.state.typing, `${e.key}`]});
         }
     };
 
@@ -91,27 +86,27 @@ class Screen extends React.Component {
             <div className='screen'>
                 <div className="banner">
                     <div className="location-half">
-                        <Location location={this.props.location} />
+                        <Location location={this.state.location} />
                     </div>
                     <div className="stats-half">
                         <div className="stats">
                             <div className="score-section">
                                 <p>Score :</p>
-                                <Score score={this.props.score} />
+                                <Score score={this.state.score} />
                             </div>
                             <div className="moves-section">
                                 <p>Moves :</p>
-                                <Moves moves={this.props.moves} />
+                                <Moves moves={this.state.moves} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="screen-main">
                     <div className="screen-inner">
-                        <Text text={this.props.text} />
+                        <Text text={this.state.text} />
                         <div className="term">
                             <p className="arrow">{">"}</p>
-                            <Typing typing={this.props.typing} />
+                            <Typing typing={this.state.typing} />
                             <Cursor />
                         </div>
                     </div>

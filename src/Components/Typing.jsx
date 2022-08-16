@@ -3,7 +3,7 @@ import React from "react";
 function Typing(props) {
     return (
         <div className="typing">
-            <p>{props.typing}</p>
+            <p>{props.typing.join('')}</p>
         </div>
     );
 }
