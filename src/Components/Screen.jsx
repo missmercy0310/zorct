@@ -25,15 +25,21 @@ class Screen extends React.Component {
     }
 
     checkCommand = (command) => {
-        if (command[0] === 'sound') {
-            if (command[1] === 'on' && !command[2]) {
-                this.setState({sound: true});
-            } else if (command[1] === 'off' && !command[2]) {
-                this.setState({sound: false});
+        if (command[0]) {
+            if (command[0] === 'sound') {
+                if (command[1] === 'on' && !command[2]) {
+                    this.setState({sound: true});
+                } else if (command[1] === 'off' && !command[2]) {
+                    this.setState({sound: false});
+                }
+            } else {
+                let textArr = this.state.text;
+                textArr.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+                this.setState({text: textArr});
             }
         } else {
             let textArr = this.state.text;
-            textArr.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+            textArr.push(<div className="response"><p>I beg your pardon?</p></div>);
             this.setState({text: textArr});
         }
     }
