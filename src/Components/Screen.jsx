@@ -32,7 +32,9 @@ class Screen extends React.Component {
                 this.setState({sound: false});
             }
         } else {
-            this.state.text.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+            let textArr = this.state.text;
+            textArr.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
+            this.setState({text: textArr});
         }
     }
 
@@ -54,20 +56,24 @@ class Screen extends React.Component {
         k === 27) {
             
         } else if (k === 8) {
-            this.state.typing.pop();
-            this.setState({typing: this.state.typing});
+            let typingArr = this.state.typing;
+            typingArr.pop();
+            this.setState({typing: typingArr});
         } else if (k === 13) {
-            this.state.text.push(<p className="typed">{'>'}{
+            let textArr = this.state.text;
+            textArr.push(<p className="typed">{'>'}{
                 this.state.typing.join('')
             }</p>);
             let command = this.state.typing.join('').split(' ');
             this.checkCommand(command);
             this.setState({
                 typing: [],
-                text: this.state.text
+                text: textArr
             });
         } else if (e.key) {
-            this.setState({typing: [...this.state.typing, `${e.key}`]});
+            let typingArr = this.state.typing;
+            typingArr.push(`${e.key}`);
+            this.setState({typing: typingArr});
         }
     };
 
