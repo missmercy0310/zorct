@@ -60,7 +60,7 @@ class Screen extends React.Component {
         k === 19 ||
         k === 20 ||
         k === 27) {
-            
+            // This line intentionally left blank
         } else if (k === 8) {
             let typingArr = this.state.typing;
             typingArr.pop();
