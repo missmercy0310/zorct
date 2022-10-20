@@ -1,9 +1,12 @@
 import sound from "./sound"
+import open from "./open"
 
 const commands = (command, state) => {
     if (command[0]) {
         if (command[0] === 'sound') {
-            return sound(command);
+            return sound(command, state);
+        } else if (command[0] === 'open') {
+            return open(command, state);
         } else {
             let textArr = state.text;
             textArr.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);
