@@ -101,6 +101,14 @@
   gap: 30px;
 }
 
+.middle {
+  margin-top: 30px;
+}
+
+.bottom {
+  margin-top: 30px;
+}
+
 .response {
   margin-top: -24px;
 }

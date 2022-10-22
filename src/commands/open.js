@@ -7,10 +7,10 @@ const open = (command, state) => {
         let textArr = state.text;
         textArr.push(<div className="response">
             <div><p>The letter reads as follows:</p></div>
-            <div><p>Welcome to Hell!</p>
+            <div className="middle"><p>Welcome to Hell!</p>
             <p>You have been sent here for misuse of the word "multitudinous." Have a look around!</p>
-            <p>- M.T. Tomb</p></div>
-            <div><p>This concludes the letter.</p></div>
+            <p>- U.N. Owen</p></div>
+            <div className="bottom"><p>This concludes the letter.</p></div>
         </div>);
         return { text: textArr };
     } else {

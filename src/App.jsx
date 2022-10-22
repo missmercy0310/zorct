@@ -13,7 +13,7 @@ let start = <div className="start"><p>West of House</p><p>You are standing in an
 function App() {
   return (
     <div className="App">
-        <Screen sound={true} location={"West of House"} score={0} moves={0} text={[copy, start]} typing={[]} />
+        <Screen sound={false} location={"West of House"} score={0} moves={0} text={[copy, start]} typing={[]} />
     </div>
   );
 }
