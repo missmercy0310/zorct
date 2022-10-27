@@ -6,6 +6,7 @@ import Text from "./Text";
 import Typing from "./Typing";
 import Cursor from "./Cursor";
 import commands from "../commands";
+import locations from "../locations";
 
 class Screen extends React.Component {
     constructor(props) {
@@ -17,12 +18,18 @@ class Screen extends React.Component {
             score: this.props.score,
             moves: this.props.moves,
             text: this.props.text,
-            typing: this.props.typing
+            typing: this.props.typing,
+            inventory: this.props.inventory
         }
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
         this.checkCommand = this.checkCommand.bind(this);
+        this.setLocation = this.setLocation.bind(this);
+    }
+
+    setLocation = (location) => {
+        this.setState(locations(location, this.state));
     }
 
     checkCommand = (command) => {
@@ -57,6 +64,7 @@ class Screen extends React.Component {
             }</p>);
             let command = this.state.typing.join('').split(' ');
             this.checkCommand(command);
+            this.setLocation(this.state.location[0]);
             this.setState({
                 typing: [],
                 text: textArr
@@ -71,6 +79,7 @@ class Screen extends React.Component {
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
         window.addEventListener('keyup', this.handleKeyUp);
+        this.setLocation(this.state.location[0]);
     }
 
     componentWillUnmount() {
