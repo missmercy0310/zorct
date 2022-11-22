@@ -1,53 +1,5 @@
 import {forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse} from "./locations"
 
-class Location {
-    constructor(varName) {
-        this.varName = varName;
-        this.name = "";
-        this.description = "";
-        this.things = [];
-    }
-
-    addExit(direction, exit) {
-        switch (direction) {
-            case "n":
-                this.n = exit;
-                break;
-            case "ne":
-                this.ne = exit;
-                break;
-            case "e":
-                this.e = exit;
-                break;
-            case "se":
-                this.se = exit;
-                break;
-            case "s":
-                this.s = exit;
-                break;
-            case "sw":
-                this.sw = exit;
-                break;
-            case "w":
-                this.w = exit;
-                break;
-            case "nw":
-                this.nw = exit;
-                break;
-            default:
-                break;
-        }
-    }
-
-    printExits() {
-        return(this.n, this.ne, this.e, this.se, this.s, this.sw, this.w, this.nw);
-    }
-
-    printThings() {
-        return(this.things);
-    }
-}
-
 // Northern map
 
 // forestWest exits
@@ -112,6 +64,19 @@ southOfHouse.addExit("n", house);
 southOfHouse.addExit("w", field);
 southOfHouse.addExit("nw", westOfHouse);
 
-console.log(westOfHouse.printExits());
+let locationsList = [forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse];
 
-export {Location};
+const mapping = (location, state) => {
+    let locationArr = state.location
+    for (let i = 0; i < locationsList.length; i++) {
+        if (location[0] === locationsList[i].varName) {
+            locationArr[0] = locationsList[i].varName;
+            locationArr[1] = locationsList[i].name;
+            locationArr[2] = locationsList[i].description;
+            locationArr[3] = locationsList[i].things;
+        }
+    }
+    return { location: locationArr }
+}
+
+export default mapping;

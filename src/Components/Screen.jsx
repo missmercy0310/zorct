@@ -6,7 +6,8 @@ import Text from "./Text";
 import Typing from "./Typing";
 import Cursor from "./Cursor";
 import commands from "../commands";
-import locations from "../locations";
+// import locations from "../locations";
+import mapping from "../map";
 
 class Screen extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class Screen extends React.Component {
     }
 
     setLocation = (location) => {
-        this.setState(locations(location, this.state));
+        this.setState(mapping(location, this.state));
     }
 
     checkCommand = (command) => {
@@ -79,7 +80,7 @@ class Screen extends React.Component {
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
         window.addEventListener('keyup', this.handleKeyUp);
-        this.setLocation(this.state.location[0]);
+        this.setLocation(this.state.location);
     }
 
     componentWillUnmount() {

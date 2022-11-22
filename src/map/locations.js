@@ -1,4 +1,52 @@
-import Location from ".";
+// import Location from ".";
+
+class Location {
+    constructor(varName) {
+        this.varName = varName;
+        this.name = "";
+        this.description = "";
+        this.things = [];
+    }
+
+    addExit(direction, exit) {
+        switch (direction) {
+            case "n":
+                this.n = exit;
+                break;
+            case "ne":
+                this.ne = exit;
+                break;
+            case "e":
+                this.e = exit;
+                break;
+            case "se":
+                this.se = exit;
+                break;
+            case "s":
+                this.s = exit;
+                break;
+            case "sw":
+                this.sw = exit;
+                break;
+            case "w":
+                this.w = exit;
+                break;
+            case "nw":
+                this.nw = exit;
+                break;
+            default:
+                break;
+        }
+    }
+
+    printExits() {
+        return(this.n, this.ne, this.e, this.se, this.s, this.sw, this.w, this.nw);
+    }
+
+    printThings() {
+        return(this.things);
+    }
+}
 
 // Northern map
 
@@ -7,8 +55,8 @@ forestWest.name = "Western Forest";
 forestWest.description = "You are in the western end of a forest.";
 
 const forestEast = new Location("forestEast");
-forestWest.name = "Eastern Forest";
-forestWest.description = "You are in the eastern end of a forest.";
+forestEast.name = "Eastern Forest";
+forestEast.description = "You are in the eastern end of a forest.";
 
 const northOfHouse = new Location("northOfHouse");
 northOfHouse.name = "North of House";
@@ -32,8 +80,8 @@ house.description = "How did you get in my house?";
 // Southern map
 
 const swampSouth = new Location("swampSouth");
-swampNorth.name = "Southern Swamp";
-swampNorth.description = "You are wading through the southern portion of a swamp. The frogs don't croak here.";
+swampSouth.name = "Southern Swamp";
+swampSouth.description = "You are wading through the southern portion of a swamp. The frogs don't croak here.";
 
 const field = new Location("field");
 field.name = "An Empty Field";
