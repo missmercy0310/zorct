@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Screen from './Components/Screen';
+import {westOfHouse} from "./map/locations";
 
 /* === Variables === */
 
@@ -13,7 +14,7 @@ let start = <div className="start"><p>West of House</p><p>You are standing in an
 function App() {
   return (
     <div className="App">
-        <Screen sound={false} location={["westOfHouse"]} score={0} moves={0} text={[copy, start]} typing={[]} inventory={[]} />
+        <Screen sound={false} location={westOfHouse} score={0} moves={0} text={[copy, start]} typing={[]} inventory={[]} />
     </div>
   );
 }

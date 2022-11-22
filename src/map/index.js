@@ -1,4 +1,4 @@
-import {forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse} from "./locations"
+import { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse } from "./locations"
 
 // Northern map
 
@@ -67,16 +67,13 @@ southOfHouse.addExit("nw", westOfHouse);
 let locationsList = [forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse];
 
 const mapping = (location, state) => {
-    let locationArr = state.location
+    let current = state.location
     for (let i = 0; i < locationsList.length; i++) {
-        if (location[0] === locationsList[i].varName) {
-            locationArr[0] = locationsList[i].varName;
-            locationArr[1] = locationsList[i].name;
-            locationArr[2] = locationsList[i].description;
-            locationArr[3] = locationsList[i].things;
+        if (location === locationsList[i]) {
+            current = locationsList[i];
         }
     }
-    return { location: locationArr }
+    return { location: current }
 }
 
 export default mapping;

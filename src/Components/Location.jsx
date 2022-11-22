@@ -3,7 +3,7 @@ import React from "react";
 function Location(props) {
     return (
         <div className="location">
-            <p>{props.location[1]}</p>
+            <p>{props.location.name}</p>
         </div>
     );
 }
