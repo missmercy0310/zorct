@@ -1,8 +1,10 @@
 const open = (command, state) => {
-    if (command[1] === 'mailbox' && !command[2] && state.location[0] === "West of House") {
+    if (command[1] === 'mailbox' && !command[2] && state.location.varName === "westOfHouse") {
+        let location = state.location;
+        location.things[0][1] = "open";
         let textArr = state.text;
         textArr.push(<div className="response"><p>There is a letter in the mailbox.</p></div>);
-        return { text: textArr };
+        return { text: textArr, location: location};
     } else if (command[1] === 'letter' && !command[2] && state.inventory.includes("letter")) {
         let textArr = state.text;
         textArr.push(<div className="response">

@@ -1,5 +1,5 @@
 const take = (command, state) => {
-    if (command[1] === 'letter' && !command[2] && state.location[0] === "West of House") {
+    if (command[1] === 'letter' && !command[2] && state.location.varName === "westOfHouse") {
         let textArr = state.text;
         textArr.push(<div className="response"><p>Letter added to inventory.</p></div>);
         let inventoryArr = state.inventory;

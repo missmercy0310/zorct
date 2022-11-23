@@ -7,7 +7,7 @@ import {westOfHouse} from "./map/locations";
 /* === Variables === */
 
 let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
-let start = <div className="start"><p>West of House</p><p>You are standing in an open field west of a white house, with a boarded front door.</p><p>There is a small mailbox here.</p></div>;
+let start = <div className="start"><p>{westOfHouse.name}</p><p>{westOfHouse.description}</p></div>;
 
 /* === Components === */
 

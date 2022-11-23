@@ -1,5 +1,3 @@
-// import Location from ".";
-
 class Location {
     constructor(varName) {
         this.varName = varName;
