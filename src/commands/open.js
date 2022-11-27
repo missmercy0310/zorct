@@ -1,25 +1,13 @@
 const open = (command, state) => {
-    if (command[1] === 'mailbox' && !command[2] && state.location.varName === "westOfHouse") {
-        let location = state.location;
-        location.things[0][1] = "open";
-        let textArr = state.text;
-        textArr.push(<div className="response"><p>There is a letter in the mailbox.</p></div>);
-        return { text: textArr, location: location};
-    } else if (command[1] === 'letter' && !command[2] && state.inventory.includes("letter")) {
-        let textArr = state.text;
-        textArr.push(<div className="response">
-            <div><p>The letter reads as follows:</p></div>
-            <div><p>Welcome to Hell!</p>
-            <p>You have been sent here for misuse of the word "multitudinous." Have a look around!</p>
-            <p>- U.N. Owen</p></div>
-            <div><p>This concludes the letter.</p></div>
-        </div>);
-        return { text: textArr };
-    } else {
-        let textArr = state.text;
-        textArr.push(<div className="response"><p>I don't know the word "{command[1]}"</p></div>);
-        return { text: textArr };
+    let textArr = state.text;
+    let response = <div className="response"><p>You can't open that.</p></div>;
+    for (let i = 0; i < state.location.things.length; i++) {
+        if (command[1] === state.location.things[i].id && state.location.things[i].openable) {
+            response = state.location.things[i].opened;
+        }
     }
+    textArr.push(response);
+    return { text: textArr };
 }
 
 export default open

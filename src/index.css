@@ -105,7 +105,10 @@
   margin-top: -24px;
   display: flex;
   flex-direction: column;
-  /* gap: 30px; */
+}
+
+.letter {
+  gap: 30px;
 }
 
 .term {
