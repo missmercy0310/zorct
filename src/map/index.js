@@ -1,4 +1,12 @@
-import { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse } from "./locations"
+import forestWest from "./forestWest";
+import forestEast from "./forestEast";
+import northOfHouse from "./northOfHouse";
+import swampNorth from "./swampNorth";
+import westOfHouse from "./westOfHouse";
+import house from "./house";
+import swampSouth from "./swampSouth";
+import field from "./field";
+import southOfHouse from "./southOfHouse";
 
 // Northern map
 
@@ -64,16 +72,4 @@ southOfHouse.addExit("n", house);
 southOfHouse.addExit("w", field);
 southOfHouse.addExit("nw", westOfHouse);
 
-let locationsList = [forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse];
-
-const mapping = (location, state) => {
-    let current = state.location
-    for (let i = 0; i < locationsList.length; i++) {
-        if (location === locationsList[i]) {
-            current = locationsList[i];
-        }
-    }
-    return { location: current }
-}
-
-export default mapping;
+export { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse}

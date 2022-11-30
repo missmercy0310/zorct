@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Screen from './Components/Screen';
-import {westOfHouse} from "./map/locations";
+import {westOfHouse} from "./map";
 
 /* === Variables === */
 
@@ -14,7 +14,7 @@ let start = <div className="start"><p>{westOfHouse.name}</p><p>{westOfHouse.desc
 function App() {
   return (
     <div className="App">
-        <Screen sound={false} location={westOfHouse} score={0} moves={0} text={[copy, start]} typing={[]} inventory={[]} />
+        <Screen sound={false} score={0} moves={0} text={[copy, start]} typing={[]} inventory={[]} />
     </div>
   );
 }

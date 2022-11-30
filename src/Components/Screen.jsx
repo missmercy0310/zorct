@@ -1,13 +1,12 @@
 import React from "react";
-import Location from "./Location";
+import Place from "./Place";
 import Score from "./Score";
 import Moves from "./Moves";
 import Text from "./Text";
 import Typing from "./Typing";
 import Cursor from "./Cursor";
 import commands from "../commands";
-// import locations from "../locations";
-import mapping from "../map";
+import { westOfHouse } from "../map";
 
 class Screen extends React.Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class Screen extends React.Component {
 
         this.state = {
             sound: this.props.sound,
-            location: this.props.location,
+            place: westOfHouse,
             score: this.props.score,
             moves: this.props.moves,
             text: this.props.text,
@@ -26,11 +25,6 @@ class Screen extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
         this.checkCommand = this.checkCommand.bind(this);
-        this.setLocation = this.setLocation.bind(this);
-    }
-
-    setLocation = (location) => {
-        this.setState(mapping(location, this.state));
     }
 
     checkCommand = (command) => {
@@ -65,7 +59,6 @@ class Screen extends React.Component {
             }</p>);
             let command = this.state.typing.join('').split(' ');
             this.checkCommand(command);
-            this.setLocation(this.state.location[0]);
             this.setState({
                 typing: [],
                 text: textArr
@@ -80,7 +73,6 @@ class Screen extends React.Component {
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
         window.addEventListener('keyup', this.handleKeyUp);
-        this.setLocation(this.state.location);
     }
 
     componentWillUnmount() {
@@ -88,12 +80,16 @@ class Screen extends React.Component {
         window.removeEventListener('keyup', this.handleKeyUp);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        
+    }
+
     render() {
         return (
             <div className='screen'>
                 <div className="banner">
-                    <div className="location-half">
-                        <Location location={this.state.location} />
+                    <div className="place-half">
+                        <Place place={this.state.place} />
                     </div>
                     <div className="stats-half">
                         <div className="stats">
