@@ -4,33 +4,34 @@ class Place {
         this.name = "";
         this.description = "";
         this.things = [];
+        this.directions = [["north"],["northeast"],["east"],["southeast"],["south"],["southwest"],["west"],["northwest"]]
     }
 
     addExit(direction, exit) {
         switch (direction) {
             case "n":
-                this.n = exit;
+                this.directions[0].push(exit);
                 break;
             case "ne":
-                this.ne = exit;
+                this.directions[1].push(exit);
                 break;
             case "e":
-                this.e = exit;
+                this.directions[2].push(exit);
                 break;
             case "se":
-                this.se = exit;
+                this.directions[3].push(exit);
                 break;
             case "s":
-                this.s = exit;
+                this.directions[4].push(exit);
                 break;
             case "sw":
-                this.sw = exit;
+                this.directions[5].push(exit);
                 break;
             case "w":
-                this.w = exit;
+                this.directions[6].push(exit);
                 break;
             case "nw":
-                this.nw = exit;
+                this.directions[7].push(exit);
                 break;
             default:
                 break;
@@ -38,7 +39,7 @@ class Place {
     }
 
     printExits() {
-        return(this.n, this.ne, this.e, this.se, this.s, this.sw, this.w, this.nw);
+        return(this.directions);
     }
 
     printThings() {

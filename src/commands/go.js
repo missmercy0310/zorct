@@ -1,13 +1,17 @@
 const go = (command, state) => {
-    if (command[1] === 'north' && !command[2]) {
-        let textArr = state.text;
-        textArr.push(<div className="response"><p>{state.place.n.name}</p><p>{state.place.n.description}</p></div>);
-        return { text: textArr, moves: state.moves += 1, place: state.place.n };
-    } else if (command[1] === 'south' && !command[2]) {
-        let textArr = state.text;
-        textArr.push(<div className="response"><p>{state.place.s.name}</p><p>{state.place.s.description}</p></div>);
-        return { text: textArr, moves: state.moves += 1, place: state.place.s };
+    let textArr = state.text;
+    let movesNum = state.moves;
+    let placeCopy = state.place;
+    let response = <div className="response"><p>You can't go there.</p></div>;
+    for (let i = 0; i < state.place.directions.length; i++) {
+        if (command[1] === state.place.directions[i][0] && state.place.directions[i][1]) {
+            response = <div className="response"><p>{state.place.directions[i][1].name}</p><p>{state.place.directions[i][1].description}</p></div>;
+            movesNum += 1;
+            placeCopy = state.place.directions[i][1];
+        }
     }
+    textArr.push(response);
+    return { text: textArr, moves: movesNum, place: placeCopy };
 }
 
 export default go

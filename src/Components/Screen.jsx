@@ -8,18 +8,21 @@ import Cursor from "./Cursor";
 import commands from "../commands";
 import { westOfHouse } from "../map";
 
+let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
+let start = <div className="start"><p>{westOfHouse.name}</p><p>{westOfHouse.description}</p></div>;
+
 class Screen extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            sound: this.props.sound,
+            sound: false,
             place: westOfHouse,
-            score: this.props.score,
-            moves: this.props.moves,
-            text: this.props.text,
-            typing: this.props.typing,
-            inventory: this.props.inventory
+            score: 0,
+            moves: 0,
+            text: [copy, start],
+            typing: [],
+            inventory: []
         }
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -78,10 +81,6 @@ class Screen extends React.Component {
     componentWillUnmount() {
         window.removeEventListener('keydown', this.handleKeyDown);
         window.removeEventListener('keyup', this.handleKeyUp);
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        
     }
 
     render() {

@@ -72,4 +72,4 @@ southOfHouse.addExit("n", house);
 southOfHouse.addExit("w", field);
 southOfHouse.addExit("nw", westOfHouse);
 
-export { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse}
+export { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse }
