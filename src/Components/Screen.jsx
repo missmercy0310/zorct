@@ -6,7 +6,7 @@ import Text from "./Text";
 import Typing from "./Typing";
 import Cursor from "./Cursor";
 import commands from "../commands";
-import { westOfHouse } from "../map";
+import { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse } from "../map";
 
 let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
 let start = <div className="start"><p>{westOfHouse.name}</p><p>{westOfHouse.description}</p></div>;
@@ -22,7 +22,8 @@ class Screen extends React.Component {
             moves: 0,
             text: [copy, start],
             typing: [],
-            inventory: []
+            inventory: [],
+            map: [forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse]
         }
 
         this.handleKeyDown = this.handleKeyDown.bind(this);

@@ -10,28 +10,28 @@ class Place {
     addExit(direction, exit) {
         switch (direction) {
             case "n":
-                this.directions[0].push(exit);
+                this.directions[0].push(exit.varName);
                 break;
             case "ne":
-                this.directions[1].push(exit);
+                this.directions[1].push(exit.varName);
                 break;
             case "e":
-                this.directions[2].push(exit);
+                this.directions[2].push(exit.varName);
                 break;
             case "se":
-                this.directions[3].push(exit);
+                this.directions[3].push(exit.varName);
                 break;
             case "s":
-                this.directions[4].push(exit);
+                this.directions[4].push(exit.varName);
                 break;
             case "sw":
-                this.directions[5].push(exit);
+                this.directions[5].push(exit.varName);
                 break;
             case "w":
-                this.directions[6].push(exit);
+                this.directions[6].push(exit.varName);
                 break;
             case "nw":
-                this.directions[7].push(exit);
+                this.directions[7].push(exit.varName);
                 break;
             default:
                 break;
