@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/zorct/static/css/main.756b193f.css",
+    "main.js": "/zorct/static/js/main.06d18b31.js",
+    "static/js/787.4b95136b.chunk.js": "/zorct/static/js/787.4b95136b.chunk.js",
+    "static/media/ArcadeInterlaced.svg": "/zorct/static/media/ArcadeInterlaced.a010458ff4e4a36de8ca.svg",
+    "static/media/ArcadeInterlaced.eot": "/zorct/static/media/ArcadeInterlaced.dffde6b85fdb6ac3fafe.eot",
+    "static/media/ArcadeInterlaced.ttf": "/zorct/static/media/ArcadeInterlaced.e12e2d267ff47324bff5.ttf",
+    "static/media/Windows-Command-Prompt.svg": "/zorct/static/media/Windows-Command-Prompt.8b40ebc9259b76e5f25d.svg",
+    "static/media/Windows-Command-Prompt.eot": "/zorct/static/media/Windows-Command-Prompt.d73c4917ef41dc5e4d96.eot",
+    "static/media/Windows-Command-Prompt.ttf": "/zorct/static/media/Windows-Command-Prompt.534ce8af36a4188c3c19.ttf",
+    "static/media/ArcadeInterlaced.woff": "/zorct/static/media/ArcadeInterlaced.1a02f9c97d7cb56fdba9.woff",
+    "static/media/Windows-Command-Prompt.woff": "/zorct/static/media/Windows-Command-Prompt.b7e7c915132a34cf4a2b.woff",
+    "index.html": "/zorct/index.html",
+    "main.756b193f.css.map": "/zorct/static/css/main.756b193f.css.map",
+    "main.06d18b31.js.map": "/zorct/static/js/main.06d18b31.js.map",
+    "787.4b95136b.chunk.js.map": "/zorct/static/js/787.4b95136b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.756b193f.css",
+    "static/js/main.06d18b31.js"
+  ]
+}
