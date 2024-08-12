@@ -5,6 +5,7 @@ import go from "./go"
 import read from "./read"
 import save from "./save"
 import load from "./load"
+import help from "./help"
 
 const commands = (command, state) => {
     if (command[0]) {
@@ -22,6 +23,8 @@ const commands = (command, state) => {
             return save(command, state);
         } else if (command[0] === 'load') {
             return load(command, state);
+        } else if (command[0] === 'help') {
+            return help(command, state);
         } else {
             let textArr = state.text;
             textArr.push(<div className="response"><p>I don't know the word "{command[0]}"</p></div>);

@@ -3,7 +3,7 @@ const open = (command, state) => {
     let response = <div className="response"><p>You can't open that.</p></div>;
     for (let i = 0; i < state.place.things.length; i++) {
         if (command[1] === state.place.things[i].id && state.place.things[i].openable) {
-            response = state.place.things[i].opened;
+            response = state.place.things[i].open;
         }
     }
     textArr.push(response);

@@ -8,7 +8,7 @@ import Cursor from "./Cursor";
 import commands from "../commands";
 import { forestWest, forestEast, northOfHouse, swampNorth, westOfHouse, house, swampSouth, field, southOfHouse } from "../map";
 
-let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2022 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
+let copy = <div className="copy"><p className='title'>Hellscape</p><p>Copyright (c) 2024 Mar Mercy. All rights reserved.</p><p>Revision 00</p></div>;
 let start = <div className="start"><p>{westOfHouse.name}</p><p>{westOfHouse.description}</p></div>;
 
 class Screen extends React.Component {

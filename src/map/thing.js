@@ -2,7 +2,7 @@ class Thing {
     constructor(id) {
         this.id = id;
         this.takable = false;
-        this.taken = null;
+        this.taken = false;
         this.openable = false;
         this.open = null;
         this.readable = false;

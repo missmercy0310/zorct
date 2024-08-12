@@ -22,7 +22,7 @@ letter.read = <div className="response letter">
 
 const mailbox = new Thing("mailbox");
 mailbox.openable = true;
-mailbox.opened = <div className="response"><p>There is a letter in the mailbox.</p></div>;
+mailbox.open = <div className="response"><p>There is a letter in the mailbox.</p></div>;
 mailbox.readable = true;
 mailbox.read = <div className="response"><p>The mailbox is labeled. The label reads "666 Hell St."</p></div>;
 
